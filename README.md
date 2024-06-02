@@ -10,7 +10,7 @@ O projeto foi desenvolvido utilizando o Spring Boot, uma estrutura que facilita 
 
 - Java
 - Spring Boot
-- Thymeleaf (para renderização de páginas HTML)
+- Thymeleaf
 - PostgreSQL
 - Postman
 - DBeaver
