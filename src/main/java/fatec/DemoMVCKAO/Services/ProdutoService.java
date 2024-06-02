@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-@Service
+@Service //para marcar e gerenciar classes que fornecem lógica de negócios ou funcionalidades de serviço em uma aplicação.
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
 
-    @Autowired
+    @Autowired //simplifica a injeção de dependência e facilita o desenvolvimento de aplicações com baixo acoplamento e alta coesão.
     public ProdutoService(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
@@ -31,12 +32,12 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto getProdutoById(Integer id) {
+    public Produto getProdutoById(UUID id) {
         Optional<Produto> optionalProduto = produtoRepository.findById(id);
         return optionalProduto.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    public Produto updateProduto(Integer id, Produto produto) {
+    public Produto updateProduto(UUID id, Produto produto) {
         Produto existingProduto = getProdutoById(id);
         existingProduto.setNome(produto.getNome());
         existingProduto.setPreco(produto.getPreco());
@@ -44,7 +45,7 @@ public class ProdutoService {
         return produtoRepository.save(existingProduto);
     }
 
-    public void deleteProduto(Integer id) {
+    public void deleteProduto(UUID id) {
         Produto existingProduto = getProdutoById(id);
         produtoRepository.delete(existingProduto);
     }

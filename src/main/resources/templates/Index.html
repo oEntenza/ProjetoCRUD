@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Kão Bakery</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <style>
         body {
             display: flex;
@@ -17,15 +18,15 @@
             background-size: cover;
             color: white;
         }
-        h1 {
+        h1, h2 {
             margin-bottom: 20px;
-            font-size: 2.5em;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
         }
+        h1 {
+            font-size: 2.5em;
+        }
         h2 {
-            margin-bottom: 20px;
             font-size: 1.5em;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
         }
         #botao {
             padding: 15px 30px;
@@ -53,6 +54,5 @@
 <h1>SUPER Padaria do KÃO</h1>
 <h2>Clique no botão para verificar os nossos SUPER pães</h2>
 <button id="botao" onclick="window.location.href='/produto'">Ver Pães</button>
-</button>
 </body>
 </html>

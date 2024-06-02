@@ -11,28 +11,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-@Controller
-@RequestMapping("/produto")
+@Controller //indica que esta classe é um controlador Spring MVC.
+@RequestMapping("/produto") //mapeia as requisições HTTP que começam com /produto para este controlador.
 public class ProdutoController {
     private List<Produto> produtos = new ArrayList<Produto>();
 
     private ProdutoService produtoService;
 
-    @Autowired
+    @Autowired //injeta uma instância de ProdutoService neste controlador.
     public ProdutoController(ProdutoService _produtoService)
     {
         produtoService = _produtoService;
     }
 
-    @GetMapping
+    @GetMapping //mapeia as requisições GET para o método produtos().
     public String produtos(Model model){
         model.addAttribute("produtos",produtos);
         return "Produtos";
     }
 
-    @PostMapping("/create-produto")
-    public ResponseEntity<Object> createChat(@RequestBody Produto produto) {
+    @PostMapping("/create-produto") //mapeia as requisições POST para o método createProduto().
+    public ResponseEntity<Object> createProduto(@RequestBody Produto produto) {
         try {
             Produto createdProduto = produtoService.createProduto(produto);
             return new ResponseEntity(createdProduto, HttpStatus.CREATED);
@@ -41,7 +42,7 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all") //mapeia as requisições GET para o método getAllProdutos().
     public ResponseEntity<List<Produto>> getAllProdutos() {
         try {
             List<Produto> allProdutos = produtoService.getAllProdutos();
@@ -51,8 +52,8 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Produto> getProdutoById(@PathVariable Integer id) {
+    @GetMapping("/{id}") //mapeia as requisições GET para o método getProdutoById().
+    public ResponseEntity<Produto> getProdutoById(@PathVariable UUID id) {
         try {
             Produto produto = produtoService.getProdutoById(id);
             return new ResponseEntity<>(produto, HttpStatus.OK);
@@ -61,8 +62,8 @@ public class ProdutoController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateProduto(@PathVariable Integer id, @RequestBody Produto produto) {
+    @PutMapping("/{id}") //mapeia as requisições PUT para o método updateProduto().
+    public ResponseEntity<Object> updateProduto(@PathVariable UUID id, @RequestBody Produto produto) {
         try {
             Produto updatedProduto = produtoService.updateProduto(id, produto);
             return new ResponseEntity<>(updatedProduto, HttpStatus.OK);
@@ -71,8 +72,8 @@ public class ProdutoController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProduto(@PathVariable Integer id) {
+    @DeleteMapping("/{id}") //mapeia as requisições DELETE para o método deleteProduto().
+    public ResponseEntity<Object> deleteProduto(@PathVariable UUID id) {
         try {
             produtoService.deleteProduto(id);
             return new ResponseEntity<>(HttpStatus.OK);

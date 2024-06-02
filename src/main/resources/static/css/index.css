@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: url('https://cdn.fjorgedigital.com/wp-content/uploads/2018/05/butter-1.gif') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+#botao {
+    padding: 15px 30px;
+    font-size: 20px;
+    color: #fff;
+    background: linear-gradient(135deg, #32cd32, #ff69b4);
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+#botao:hover {
+    background: linear-gradient(135deg, #28a428, #e05592);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+#botao:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}

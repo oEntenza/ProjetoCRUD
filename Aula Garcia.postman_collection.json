@@ -79,12 +79,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{Host}}produto/2",
+					"raw": "{{Host}}produto/06f9cf45-f927-4950-ad5c-19baa6ee2377",
 					"host": [
 						"{{Host}}produto"
 					],
 					"path": [
-						"2"
+						"06f9cf45-f927-4950-ad5c-19baa6ee2377"
 					]
 				}
 			},
@@ -105,25 +105,25 @@
 					}
 				},
 				"url": {
-					"raw": "{{Host}}produto/2",
+					"raw": "{{Host}}produto/06f9cf45-f927-4950-ad5c-19baa6ee2377",
 					"host": [
 						"{{Host}}produto"
 					],
 					"path": [
-						"2"
+						"06f9cf45-f927-4950-ad5c-19baa6ee2377"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PutById",
+			"name": "ModifyById",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Baguete\",\r\n    \"quantidade\": 10,\r\n    \"preco\": 3.00\r\n}",
+					"raw": "{\r\n    \"nome\": \"Ciabatta\",\r\n    \"quantidade\": 12,\r\n    \"preco\": 5.00\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -131,12 +131,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{Host}}produto/1",
+					"raw": "{{Host}}produto/68838e3f-7911-4137-869c-b49f2c9fc5d4",
 					"host": [
 						"{{Host}}produto"
 					],
 					"path": [
-						"1"
+						"68838e3f-7911-4137-869c-b49f2c9fc5d4"
 					]
 				}
 			},
