@@ -1,97 +1,180 @@
 function init() {
-    document.getElementById('list-section').style.display = 'block';
-    document.getElementById('create-section').style.display = 'none';
-    document.getElementById('edit-section').style.display = 'none';
-    document.getElementById('delete-section').style.display = 'none';
-    document.getElementById('read-section').style.display = 'none';
-}
+            listarProdutos();
+        }
 
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.style.display = 'none';
-    });
-    document.getElementById(sectionId).style.display = 'block';
-}
+    function buscarProduto() {
+        const id = document.getElementById('id-read').value;
 
-function criarProduto() {
-    const nome = document.getElementById('nome').value;
-    const quantidade = document.getElementById('quantidade').value;
-    const preco = document.getElementById('preco').value;
-
-    fetch('/api/produtos', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nome, quantidade, preco }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            alert('Produto criado com sucesso!');
-            window.location.reload();
+        fetch(`http://localhost:8080/produto/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        .catch(error => {
-            console.error('Erro ao criar produto:', error);
-        });
-}
-
-function editarProduto() {
-    const id = document.getElementById('id-edit').value;
-    const nome = document.getElementById('nome-edit').value;
-    const quantidade = document.getElementById('quantidade-edit').value;
-    const preco = document.getElementById('preco-edit').value;
-
-    fetch(`/api/produtos/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nome, quantidade, preco }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            alert('Produto editado com sucesso!');
-            window.location.reload();
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Produto não encontrado');
+            }
         })
-        .catch(error => {
-            console.error('Erro ao editar produto:', error);
-        });
-}
-
-function deletarProduto() {
-    const id = document.getElementById('id-delete').value;
-
-    fetch(`/api/produtos/${id}`, {
-        method: 'DELETE',
-    })
-        .then(response => response.json())
-        .then(data => {
-            alert('Produto deletado com sucesso!');
-            window.location.reload();
-        })
-        .catch(error => {
-            console.error('Erro ao deletar produto:', error);
-        });
-}
-
-function buscarProduto() {
-    const id = document.getElementById('id-read').value;
-
-    fetch(`/api/produtos/${id}`)
-        .then(response => response.json())
         .then(data => {
             const resultadoDiv = document.getElementById('resultado-busca');
-            if (data) {
-                resultadoDiv.innerHTML = `<p>ID: ${data.id}</p>
-                                           <p>Nome: ${data.nome}</p>
-                                           <p>Quantidade: ${data.quantidade}</p>
-                                           <p>Preço: R$ ${data.preco}</p>`;
-            } else {
-                resultadoDiv.innerHTML = '<p>Produto não encontrado</p>';
-            }
+            resultadoDiv.innerHTML = `
+                <h3>Resultado da Busca</h3>
+                <p>ID: ${data.id}</p>
+                <p>Nome: ${data.nome}</p>
+                <p>Quantidade: ${data.quantidade}</p>
+                <p>Preço: R$ ${data.preco}</p>
+            `;
         })
         .catch(error => {
             console.error('Erro ao buscar produto:', error);
+            const resultadoDiv = document.getElementById('resultado-busca');
+            resultadoDiv.innerHTML = `<p>${error.message}</p>`;
         });
-}
+    }
+
+    function deletarProduto() {
+        const id = document.getElementById('id-delete').value;
+        fetch(`http://localhost:8080/produto/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Produto deletado com sucesso!');
+            } else if (response.status === 400) {
+                throw new Error('Erro ao deletar produto. Verifique o ID e tente novamente.');
+            } else {
+                throw new Error('Erro desconhecido ao deletar produto.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao deletar produto:', error);
+            alert(error.message);
+        });
+    }
+
+    function editarProduto() {
+        const id = document.getElementById('id-edit').value;
+        const nome = document.getElementById('nome-edit').value;
+        const quantidade = document.getElementById('quantidade-edit').value;
+        const preco = document.getElementById('preco-edit').value;
+        const produto = {
+            nome: nome,
+            quantidade: quantidade,
+            preco: preco
+        };
+        fetch(`http://localhost:8080/produto/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(produto)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro ao editar produto');
+            }
+        })
+        .then(data => {
+            console.log('Produto editado:', data);
+            document.getElementById('id-edit').value = '';
+            document.getElementById('nome-edit').value = '';
+            document.getElementById('quantidade-edit').value = '';
+            document.getElementById('preco-edit').value = '';
+            alert('Produto editado com sucesso!');
+        })
+        .catch(error => {
+            console.error('Erro ao editar produto:', error);
+            alert('Erro ao editar produto. Verifique os campos e tente novamente.');
+        });
+    }
+
+    function criarProduto() {
+        const nome = document.getElementById('nome').value;
+        const quantidade = document.getElementById('quantidade').value;
+        const preco = document.getElementById('preco').value;
+        const produto = {
+            nome: nome,
+            quantidade: quantidade,
+            preco: preco
+        };
+        fetch('http://localhost:8080/produto/create-produto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(produto)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro ao criar produto');
+            }
+        })
+        .then(data => {
+            document.getElementById('nome').value = '';
+            document.getElementById('quantidade').value = '';
+            document.getElementById('preco').value = '';
+            alert('Produto criado com sucesso!');
+        })
+        .catch(error => {
+            console.error('Erro ao criar produto:', error);
+            alert('Erro ao criar produto. Verifique os campos e tente novamente.');
+        });
+    }
+
+    function listarProdutos() {
+        fetch('http://localhost:8080/produto/all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro ao listar produtos');
+            }
+        })
+        .then(data => {
+            const tbody = document.querySelector('table tbody');
+            tbody.innerHTML = '';
+            data.forEach(produto => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${produto.id}</td>
+                    <td>${produto.nome}</td>
+                    <td>${produto.quantidade}</td>
+                    <td>R$ ${produto.preco}</td>
+                `;
+                tbody.appendChild(newRow);
+            });
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    }
+
+    document.addEventListener("scroll", function(){
+        const parallax = document.querySelector(".parallax");
+        let scrollPosition = window.pageYOffset;
+        parallax.style.backgroundPositionY = -scrollPosition * 0.5 + "px";
+    });
+
+    function showSection(sectionId) {
+        if (sectionId == 'list-section'){ listarProdutos(); console.log ("funfou")}
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }

@@ -1,110 +1,152 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    color: white;
-}
-.parallax {
-    background-image: url('https://i.gifer.com/Fmbs.gif');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.content {
-    z-index: 1;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-}
-h1 {
-    margin-bottom: 30px;
-    font-size: 2.5em;
-}
-h2 {
-    margin-bottom: 20px;
-    font-size: 2em;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-input[type="text"], input[type="number"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-button:hover {
-    background-color: #0056b3;
-}
-.vertical-buttons {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-}
-.vertical-buttons button {
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 18px;
-}
-.table-container {
-    margin-top: 20px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-th {
-    background-color: #555;
-}
-#resultado-busca {
-    margin-top: 20px;
-    font-size: 1.2em;
-}
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: transparent;
-    border: none;
-    font-size: 1.5em;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-.back-button:hover {
-    transform: scale(1.1);
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            color: white;
+        }
+        .parallax {
+            background-image: url('https://i.gifer.com/Fmbs.gif');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .content {
+            z-index: 1;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        table {
+            width: 75vw;
+            margin: 0 auto 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            color: #333;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        table th, table td {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #32cd32;
+            color: white;
+            font-weight: bold;
+        }
+        table tbody tr:nth-child(odd) {
+            background-color: #ffe6f2;
+        }
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #e05592;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        .back-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .vertical-buttons {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .vertical-buttons button {
+            width: 60px;
+            height: 60px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .vertical-buttons button:hover {
+            background-color: #e05592;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        .vertical-buttons button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .section {
+            display: none;
+            text-align: center;
+            color: white;
+        }
+        .section.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #32cd32;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #28a428;
+        }
