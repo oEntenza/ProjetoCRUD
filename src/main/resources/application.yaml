@@ -3,9 +3,9 @@ server:
 
 spring:
     datasource:
-        url: jdbc:postgresql://dpg-cperjglds78s73flp9i0-a/fatecjava
-        username: postgres1
-        password: A57LGpxZCIO59qJKSIKfIteZB1B5xcfx
+        url: jdbc:postgresql://dpg-cpf4oljtg9os73b7i29g-a:5432/projeto_crud_padaria
+        username: padariakjr
+        password: ccshA2kW3Lq3esVpzYpYy2agDVnt3b5G
         driver-class-name: org.postgresql.Driver
         initialize: true
 
