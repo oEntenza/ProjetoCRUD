@@ -38,6 +38,7 @@
         <div class="section" id="create-section">
             <h2>Criar Produto</h2>
             <form id="create-form">
+                <div id="error-messages"></div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
@@ -57,7 +58,7 @@
         </div>
         <div class="section" id="edit-section">
             <h2>Editar Produto</h2>
-            <form>
+            <form id="edit-form">
                 <div class="form-group">
                     <label for="id-edit">ID:</label>
                     <input type="text" id="id-edit" name="id" required>
@@ -81,16 +82,17 @@
         </div>
         <div class="section" id="delete-section">
             <h2>Deletar Produto</h2>
-            <form>
+            <form onsubmit="deletarProduto(); return false;">
                 <div class="form-group">
                     <label for="id-delete">ID:</label>
                     <input type="text" id="id-delete" name="id" required>
                 </div>
                 <div class="form-group">
-                    <button type="button" onclick="deletarProduto()">Deletar</button>
+                    <button type="submit">Deletar</button>
                 </div>
             </form>
         </div>
+
         <div class="section" id="read-section">
             <h2>Buscar Produto</h2>
             <form onsubmit="buscarProduto(); return false;">

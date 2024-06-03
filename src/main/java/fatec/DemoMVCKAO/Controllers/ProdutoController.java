@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller //indica que esta classe é um controlador Spring MVC.
 @RequestMapping("/produto") //mapeia as requisições HTTP que começam com /produto para este controlador.

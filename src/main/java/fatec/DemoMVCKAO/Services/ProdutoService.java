@@ -20,6 +20,9 @@ public class ProdutoService {
 
     public Produto createProduto(Produto produto) {
         Produto obj = new Produto();
+        if (produto == null) { throw new IllegalArgumentException("Produto não pode ser vazio."); }
+        if (produto.getPreco() < 0) { throw new IllegalArgumentException("Preço não pode ser menor que zero."); }
+        if (produto.getQuantidade() < 0) { throw new IllegalArgumentException("Quantidade não pode ser menor que zero."); }
         obj.setNome(produto.getNome());
         obj.setPreco(produto.getPreco());
         obj.setQuantidade(produto.getQuantidade());
@@ -39,6 +42,9 @@ public class ProdutoService {
 
     public Produto updateProduto(UUID id, Produto produto) {
         Produto existingProduto = getProdutoById(id);
+        if (produto.getNome() == null) { throw new IllegalArgumentException("Nome não pode ser vazio");}
+        if (produto.getPreco() < 0) { throw new IllegalArgumentException("Preço não pode ser menor que zero."); }
+        if (produto.getQuantidade() < 0) { throw new IllegalArgumentException("Quantidade não pode ser menor que zero."); }
         existingProduto.setNome(produto.getNome());
         existingProduto.setPreco(produto.getPreco());
         existingProduto.setQuantidade(produto.getQuantidade());

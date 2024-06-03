@@ -59,15 +59,24 @@ function deletarProduto() {
 }
 
 function editarProduto() {
+    const form = document.getElementById('edit-form');
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
     const id = document.getElementById('id-edit').value;
     const nome = document.getElementById('nome-edit').value;
     const quantidade = document.getElementById('quantidade-edit').value;
     const preco = document.getElementById('preco-edit').value;
+
     const produto = {
         nome: nome,
         quantidade: quantidade,
         preco: preco
     };
+
     fetch(`http://localhost:8080/produto/${id}`, {
         method: 'PUT',
         headers: {
@@ -76,35 +85,39 @@ function editarProduto() {
         body: JSON.stringify(produto)
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Erro ao editar produto');
+        if (!response.ok) {
+            return response.json().then(data => { throw new Error(data.message || 'Erro ao editar produto'); });
         }
+        return response.json();
     })
     .then(data => {
-        console.log('Produto editado:', data);
-        document.getElementById('id-edit').value = '';
-        document.getElementById('nome-edit').value = '';
-        document.getElementById('quantidade-edit').value = '';
-        document.getElementById('preco-edit').value = '';
+        form.reset();
         alert('Produto editado com sucesso!');
     })
     .catch(error => {
         console.error('Erro ao editar produto:', error);
-        alert('Erro ao editar produto. Verifique os campos e tente novamente.');
+        alert(error.message);
     });
 }
 
 function criarProduto() {
+    const form = document.getElementById('create-form');
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
     const nome = document.getElementById('nome').value;
     const quantidade = document.getElementById('quantidade').value;
     const preco = document.getElementById('preco').value;
+
     const produto = {
         nome: nome,
         quantidade: quantidade,
         preco: preco
     };
+
     fetch('http://localhost:8080/produto/create-produto', {
         method: 'POST',
         headers: {
@@ -113,17 +126,21 @@ function criarProduto() {
         body: JSON.stringify(produto)
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
+        return response.json().then(data => ({ status: response.status, body: data }));
+    })
+    .then(response => {
+        if (response.status === 201) {
+            form.reset();
+            alert('Produto criado com sucesso!');
+        } else if (response.status === 400) {
+            let errorMessages = '';
+            for (const [key, value] of Object.entries(response.body)) {
+                errorMessages += `${value}\n`;
+            }
+            alert(errorMessages);
         } else {
             throw new Error('Erro ao criar produto');
         }
-    })
-    .then(data => {
-        document.getElementById('nome').value = '';
-        document.getElementById('quantidade').value = '';
-        document.getElementById('preco').value = '';
-        alert('Produto criado com sucesso!');
     })
     .catch(error => {
         console.error('Erro ao criar produto:', error);
