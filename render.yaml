@@ -1,0 +1,6 @@
+services:
+  - name: kjr-bakery
+    type: web
+    env: java
+    buildCommand: "./gradlew build"
+    startCommand: "java -jar build/libs/crudkjr.jar"
