@@ -1,18 +1,17 @@
-FROM maven:3.8.4-openjdk-17-slim AS builder
+FROM openjdk:17-jdk-alpine
 
 WORKDIR /app
 
 COPY pom.xml .
-RUN mvn dependency:go-offline
 
 COPY src ./src
-RUN mvn package -DskipTests
 
-FROM eclipse-temurin:17.0.7_7-jre-alpine
-WORKDIR /app
+COPY mvnw .
 
-COPY --from=builder /app/target/*.jar app.jar
+COPY .mvn .mvn
 
-EXPOSE 8080
+RUN chmod +x mvnw
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+RUN ./mvnw package
+
+CMD ["java", "-jar", "target\DemoMVCKAO-0.0.1-SNAPSHOT.war"]
