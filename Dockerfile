@@ -1,17 +1,16 @@
-FROM maven:3.8.4-openjdk-17-slim AS builder
+FROM ubuntu:latest AS build
 
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
 
-COPY pom.xml .
+RUN apt-get install maven -y
+RUN mvn clean install
 
-COPY src ./src
+FROM openjdk:17-jdk-slim
 
-COPY mvnw .
+EXPOSE 8080
 
-COPY .mvn .mvn
+COPY --from=build /target/DemoMVCKAO-0.0.1-SNAPSHOT.jar app.jar
 
-RUN chmod +x mvnw
-
-RUN ./mvnw package
-
-CMD ["java", "-jar", "target\DemoMVCKAO-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
