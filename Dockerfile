@@ -14,4 +14,4 @@ RUN chmod +x mvnw
 
 RUN ./mvnw package
 
-CMD ["java", "-jar", "target/DemoMVCKAO-0.0.1-SNAPSHOT.war"]
+CMD ["java", "-jar", "target\DemoMVCKAO-0.0.1-SNAPSHOT.jar"]
