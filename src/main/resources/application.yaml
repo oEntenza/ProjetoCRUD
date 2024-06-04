@@ -1,9 +1,9 @@
 server:
-    port: 8080
+    port: 5432
 
 spring:
     datasource:
-        url: jdbc:postgresql://dpg-cpf4oljtg9os73b7i29g-a:5432/projeto_crud_padaria
+        url: jdbc:postgresql://dpg-cpf4oljtg9os73b7i29g-a/projeto_crud_padaria
         username: padariakjr
         password: ccshA2kW3Lq3esVpzYpYy2agDVnt3b5G
         driver-class-name: org.postgresql.Driver
